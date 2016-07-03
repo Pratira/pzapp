@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="../static/stylesheets/style.css" />
+</head>
+<body>
+	<table>
+		<tr>
+			<td><h1 id = "message"></h1></td>
+		</tr>
+		<tr>
+			<td><h4 id = "message"><b>PRATIRA ZADOO</b>, <b>ID:</b> 1001236756 </h4></td><br>
+		</tr>
+		<tr>
+			<td><h1 id = "message">WELCOME!</h1></td>
+		</tr>
+		<tr><td>	<h3><b>New User Registration: </b></h3>
+				<form action="/new_user" method="post" enctype="multipart/form-data">
+				Username:<input type="text" name="new_user"><br>
+				Password:<input type="password" name="new_pass"><br>
+				<input type="submit" value="Register" name="Submit"><br>
+				</form>
+			</td>
+		</tr>
+		<tr><td>     <h3><b>Old User Login: </b></h3>
+				<form action="/user_login" method="post" enctype="multipart/form-data">
+				Username:<input type="text" name="user"><br>
+				Password:<input type="password" name="passwd"><br>
+				<input type="submit" value="Login" name="Submit"><br>
+				</form>
+			</td>
+		</tr>
+    </table>
+</body>
+</html>
