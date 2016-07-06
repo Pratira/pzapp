@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.5/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript">
+
+$(document).ready(function() 
+    { 
+        $("#userTable").tablesorter( {sortList: [[0,0], [1,0]]}); 
+    } 
+);
+</script>
+     <body>
+        <h1> Welcome : {{userID}} </h1>
+  
+        <h3>All images uploaded by the User : {{userID}}</h3>
+        <table id="userTable">
+            <thead> 
+<tr> 
+            <th>File Name</th>
+            <th>Image</th>
+            <th>Time</th>
+            <th>Priority</th>
+            </tr> 
+</thead>
+<tbody>
+            {% for item in items %}
+            <tr>
+                <td><h4>{{ item['filename'] }}</h4></td>
+                
+                <td>
+                    {% if item['content_type'] != 'text/plain': %}
+                        <img src="{{ item['url'] }}" alt="{{ item['filename'] }}" width="400" height="200">
+                    {% else: %}
+                        <p>{{item['content']}}</p>
+                    {% endif %}
+                </td>
+                <td>
+                        <h5> {{ item['time'] }}<h5>
+                </td>
+                <br>
+                 <td>
+                        <h5>{{ item['priority'] }}<h5>
+                </td>
+               </tr>
+                
+            {% endfor %} 
+            </tbody>    
+        </table>
+    </body>
+</html>
+<style>
+    table, th, td {
+   border: 1px solid black;
+}
+    </style>

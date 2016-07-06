@@ -1,5 +1,88 @@
 <html>
 <body>
-SUCCESS!
+	<table>
+		<tr>
+			<td><h1 id = "message"></h1></td>
+		</tr>
+		<tr>
+			<td><h4 id = "message"><b>PRATIRA ZADOO</b>, <b>ID:</b> 1001236756 </h4></td><br>
+		</tr>
+		<tr>
+			<td><h4 id = "message"><b>Welcome to File Repository, {{ user }}</b></h4></td><br>
+		</tr>
+		<tr>
+			<td>
+				<form action="/upload" method="post" enctype="multipart/form-data">
+				Upload Your File Here:<input type="file" value="Choose File" name="filecontents"><br>
+				Subject: <input type="text" name= "subject"><br>
+				Name of File: <input type="text" name= "filename"><br>
+				Select Priority:<select name = 'priority'>
+								<option value = 1>1</option>
+								<option value = 2>2</option>
+								<option value = 3>3</option>
+								<option value = 4>4</option>
+								<option value = 5>5</option>
+								<option value = 6>6</option>
+								<option value = 7>7</option>
+								<option value = 8>8</option>
+								<option value = 9>9</option>
+								<option value = 10>10</option>
+								</select>
+				<input type="submit" value="upload" name="Upload"><br>
+
+				</form>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<form action="/showAllFiles" method="post" enctype="multipart/form-data">
+				<h3><b> Click to view all files uploaded:  </b></h3>
+				<input type="submit" value="showAllFiles" name="showAllFiles">
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<form action="/deleteFile" method="post" enctype="multipart/form-data">
+	            <h3>Enter the file name to be deleted: </h3>
+	            <input type='hidden' name= 'username' value="{{user}}">
+	            <input type='text' name= 'filename'>
+				<input type="submit" value="deleteFile" name="deleteFile"<br><br>
+        		</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<form action="/searchFile" method="post" enctype="multipart/form-data">
+	            <h3>Enter the file name to be searched: </h3>
+	            <input type='hidden' name= 'username' value="{{user}}">
+	            <input type='text' name= 'searchFile'>
+				<input type="submit" value="searchFile" name="searchFile"<br><br>
+        		</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<form action="/searchKey" method="post" enctype="multipart/form-data">
+	            <h3>Enter a keyword to be searched in text files: </h3>
+	            <input type='hidden' name= 'username' value="{{user}}">
+	            <input type='text' name= 'searchKey'>
+				<input type="submit" value="searchKey" name="searchKey"<br><br>
+        		</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<form action="/searchFile" method="post" enctype="multipart/form-data">
+	            <h3>Update the priority of your file: </h3>
+	            <input type='hidden' name= 'username' value="{{user}}">
+	            Enter new priority:<input type='text' name= 'updatePriority'><br>
+	            Enter the filename:<input type='text' name= 'filename'><br>
+				<input type="submit" value="updatePriority" name="updatePriority"<br><br>
+        		</form>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
