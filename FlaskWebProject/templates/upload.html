@@ -1,6 +1,10 @@
 <html>
 <body>
+<img src="C:\Users\Admin pc\Desktop\quiz8\logo.jpg" alt="image"style="width:150px;height:128px;>
 	<table>
+		<tr>
+			<td><img src="C:\Users\Admin pc\Desktop\quiz8\logo.jpg" alt="image"style="width:150px;height:128px;></td>
+		</tr>
 		<tr>
 			<td><h1 id = "message"></h1></td>
 		</tr>
@@ -8,92 +12,39 @@
 			<td><h4 id = "message"><b>PRATIRA ZADOO</b>, <b>ID:</b> 1001236756 </h4></td><br>
 		</tr>
 		<tr>
-			<td><h4 id = "message"><b>Welcome to File Repository, {{ user }}</b></h4></td><br>
+			<td><h4 id = "message"><b>Welcome to CloudAir, {{ user }}</b></h4></td><br>
 		</tr>
 		<tr>
 			<td>
-				<form action="/upload" method="post" enctype="multipart/form-data">
-				Upload Your File Here:<input type="file" value="Choose File" name="filecontents"><br>
-				Subject: <input type="text" name= "subject"><br>
-				Name of File: <input type="text" name= "filename"><br>
-				Select Priority:<select name = 'priority'>
-								<option value = 1>1</option>
-								<option value = 2>2</option>
-								<option value = 3>3</option>
-								<option value = 4>4</option>
-								<option value = 5>5</option>
-								<option value = 6>6</option>
-								<option value = 7>7</option>
-								<option value = 8>8</option>
-								<option value = 9>9</option>
-								<option value = 10>10</option>
+				<form action="/flight" method="post" enctype="multipart/form-data">
+				Hub City: <select name = 'hub'>
+									<option value = 'GP'> Grand Prairie (GP)</option>
+									<option value = 'ARL'> Arlington (ARL)</option><br>
 								</select>
-				<input type="submit" value="upload" name="Upload"><br>
-
+				Vacation City: <select name = 'vacation'>
+										<option value = 'MIA'> Miami (MIA) </option>
+										<option value = 'LA'> LosAngeles (LA) </option>
+										<option value = 'SEA'> Seattle (SEA)  </option>
+										<option value = 'LI'> LongIsland (LI) </option>
+										<br>
+									</select>
+				Enter date: <input type="text" name="date_of_travel"><br>
+				<input type="submit" value="Check Flights" name="flight"><br>
+				<input type="submit" value="Make Reservation" name="reservation">
 				</form>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>
-				<form action="/showAllFiles" method="post" enctype="multipart/form-data">
-				<h3><b> Click to view all files uploaded:  </b></h3>
-				<input type="submit" value="showAllFiles" name="showAllFiles">
+				<form action="/enterdate" method="post" enctype="multipart/form-data">
+				<h3><b> Enter a date to view passengers traveling on that date:  </b></h3>
+				<input type="text" name="enterdate"><br>
+				<input type="submit" value="date" name="enterdate">
 				</form>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<form action="/deleteFile" method="post" enctype="multipart/form-data">
-	            <h3>Enter the file name to be deleted: </h3>
-	            <input type='hidden' name= 'username' value="{{user}}">
-	            <input type='text' name= 'filename'>
-				<input type="submit" value="deleteFile" name="deleteFile"<br><br>
-        		</form>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<form action="/searchFile" method="post" enctype="multipart/form-data">
-	            <h3>Enter the file name to be searched: </h3>
-	            <input type='hidden' name= 'username' value="{{user}}">
-	            <input type='text' name= 'searchFile'>
-				<input type="submit" value="searchFile" name="searchFile"<br><br>
-        		</form>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<form action="/searchKey" method="post" enctype="multipart/form-data">
-	            <h3>Enter a keyword to be searched in text files: </h3>
-	            <input type='hidden' name= 'username' value="{{user}}">
-	            <input type='text' name= 'searchKey'>
-				<input type="submit" value="searchKey" name="searchKey"<br><br>
-        		</form>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<form action="/updatePriority" method="post" enctype="multipart/form-data">
-	            <h3>Update the priority of your file: </h3>
-	            <input type='hidden' name= 'username' value="{{user}}">
-	            Enter new priority:<input type='text' name= 'priority'><br>
-	            Enter the filename:<input type='text' name= 'filename'><br>
-				<input type="submit" value="updatePriority" name="updatePriority"<br><br>
-        		</form>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<form action="/sort" method="post" enctype="multipart/form-data">
-	            <h3>Sort according to fieldname and order: </h3>
-	            <input type='hidden' name= 'username' value="{{user}}">
-	            Enter field name to sort:<input type='text' name= 'field'><br>
-	            Enter the sorting order:<input type='text' name= 'order'><br>
-				<input type="submit" value="sort" name="sort"<br><br>
-        		</form>
-			</td>
-		</tr>
+		
 	</table>
 </body>
 </html>
