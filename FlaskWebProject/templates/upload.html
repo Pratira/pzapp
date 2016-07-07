@@ -83,6 +83,17 @@
         		</form>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<form action="/sort" method="post" enctype="multipart/form-data">
+	            <h3>Sort according to fieldname and order: </h3>
+	            <input type='hidden' name= 'username' value="{{user}}">
+	            Enter field name to sort:<input type='text' name= 'field'><br>
+	            Enter the sorting order:<input type='text' name= 'order'><br>
+				<input type="submit" value="sort" name="sort"<br><br>
+        		</form>
+			</td>
+		</tr>
 	</table>
 </body>
 </html>

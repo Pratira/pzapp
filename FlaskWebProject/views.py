@@ -364,3 +364,44 @@ def update():
             #print 'end of if condition 2'
     #print 'outside of loop'
     return render_template("displayPhotos.html", items=updateFiles,user=userID)
+
+@app.route('/sort', methods=['POST', 'GET'])
+def sort():
+    field = str(request.form['field'])
+    order = int(request.form['order'])
+    print order
+    print field
+
+    fs = gridfs.GridFS(db)
+
+    sortFiles = []
+
+    for file in db.fs.files.find().sort([(field , order)]):
+        filename = file['filename']
+        read_file = fs.find_one({"filename": filename}).read()
+        if file['contentType'] != 'text/plain':
+            data_received="data:image/jpeg;base64," + base64.b64encode(read_file)
+            contents = {}
+            contents['filename']=filename
+            contents['url']=data_received
+            contents['time']=file['uploadDate']
+            timeSplit = str(contents['time']).split('.')
+            contents['time']=timeSplit[0]
+            contents['priority']=file['priority']
+            contents['content_type']=file['contentType']
+            sortFiles.append(contents)
+            #print 'end of if condition 1'
+        else:
+            print 'inside second if condition of text'
+            contents = {}
+            contents['filename'] = filename
+            contents['content'] = read_file
+            #adding upload date in the contents
+            contents['time'] = file['uploadDate']
+            timeSplit = str(contents['time']).split('.')
+            contents['time'] = timeSplit[0]
+            contents['priority'] = file['priority']
+            contents['content_type'] = file['contentType']
+            sortFiles.append(contents)
+
+    return render_template("displayPhotos.html", items=sortFiles,user=userID)
