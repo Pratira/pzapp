@@ -64,7 +64,7 @@ def login():
 
     return render_template('upload.html', user = userID)
 
-@app.route('/upload', methods=['GET','POST'])
+@app.route('/upload', methods=['POST'])
 def upload():
     print "Inside upload photo"
     subject = request.form['subject']
@@ -96,7 +96,7 @@ def upload():
     fs = gridfs.GridFS(db)
     print 'file length' + str(length_of_file)
     res = db.register.find({'username':userID})    
-    
+    #calculating the quota and size remaining with the user
     quota = ''
     size = ''
     for item in res:
@@ -228,7 +228,6 @@ def delete():
             contents['time']=timeSplit[0]
             contents['priority']=file['priority']
             contents['content_type']=file['contentType']
-            contents
             list_allFiles.append(contents)
         else:
             contents = {}
@@ -240,7 +239,6 @@ def delete():
             contents['time'] = timeSplit[0]
             contents['priority'] = file['priority']
             contents['content_type'] = file['contentType']
-            contents
             list_allFiles.append(contents)
 
     return render_template("displayPhotos.html",items=list_allFiles, user = userID)
@@ -306,7 +304,6 @@ def searchFile():
             contents['time']=timeSplit[0]
             contents['priority']=file['priority']
             contents['content_type']=file['contentType']
-            contents
             listAllFiles.append(contents)
             print 'end of if condition 1'
         else:
@@ -320,10 +317,50 @@ def searchFile():
             contents['time'] = timeSplit[0]
             contents['priority'] = file['priority']
             contents['content_type'] = file['contentType']
-            contents
             listAllFiles.append(contents)
             print 'end of if condition 2'
     print 'outside of loop'
-    return render_template("displayPhotos.html", items=listAllFiles)
+    return render_template("displayPhotos.html", items=listAllFiles, user=userID)
 
-#@app.route('/updatePriority', methods=['POST','GET'])
+@app.route('/updatePriority', methods=['POST','GET'])
+def update():
+    priority = request.form['priority']
+    filename = request.form['filename']
+    
+    fs = gridfs.GridFS(db)
+
+    db.fs.files.find_and_modify(query={'filename':filename},update={'$set':{'priority' : priority}})
+
+    updateFiles = []
+    for file in db.fs.files.find({"username":userID}):
+        filename = file['filename']
+        #print filename
+        read_file = fs.find_one({"filename": filename}).read()
+        #print read_file
+        if file['contentType'] != 'text/plain':
+            data_received="data:image/jpeg;base64," + base64.b64encode(read_file)
+            contents = {}
+            contents['filename']=filename
+            contents['url']=data_received
+            contents['time']=file['uploadDate']
+            timeSplit = str(contents['time']).split('.')
+            contents['time']=timeSplit[0]
+            contents['priority']=file['priority']
+            contents['content_type']=file['contentType']
+            updateFiles.append(contents)
+            #print 'end of if condition 1'
+        else:
+            print 'inside second if condition of text'
+            contents = {}
+            contents['filename'] = filename
+            contents['content'] = read_file
+            #adding upload date in the contents
+            contents['time'] = file['uploadDate']
+            timeSplit = str(contents['time']).split('.')
+            contents['time'] = timeSplit[0]
+            contents['priority'] = file['priority']
+            contents['content_type'] = file['contentType']
+            updateFiles.append(contents)
+            #print 'end of if condition 2'
+    #print 'outside of loop'
+    return render_template("displayPhotos.html", items=updateFiles,user=userID)
