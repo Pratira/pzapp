@@ -92,13 +92,15 @@ def flight():
         print source
         
         if file['date'] == traveldate:
-            contents = {}
-            contents['date']=file['date']
-            contents['name']=file['name']
-            contents['hub']=file['hub']
-            contents['vacation']=file['vacation']
-            list_allFlights.append(contents)
-            print contents   
+            if file['hub'] == hub:
+                if file['vacation'] == vacation:
+                    contents = {}
+                    contents['date']=file['date']
+                    contents['name']=file['name']
+                    contents['hub']=file['hub']
+                    contents['vacation']=file['vacation']
+                    list_allFlights.append(contents)
+                    print contents   
 
     #return 'here'
     return render_template("displayPhotos.html",items=list_allFlights, userID = userID)
