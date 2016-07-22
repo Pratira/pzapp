@@ -1,33 +1,36 @@
 <html>
    
      <body>
-
         <h1> Welcome : {{userID}} </h1>
         <h3> {{timeup}} </h3>
-        <h3>All flights : {{userID}}</h3>
+        <h3>All images uploaded by the User : {{userID}}</h3>
         <table id="userTable">
             <thead> 
 <tr> 
-            <th>Date</th>
-            <th>Name</th>
-            <th>Hub City</th>
-            <th>Vacation City</th>
+            <th>File Name</th>
+            <th>Image</th>
+            <th>Time</th>
+            <th>Priority</th>
             </tr> 
 </thead>
 <tbody>
             {% for item in items %}
             <tr>
-                <td><h5>{{ item['date'] }}</h5></td>
+                <td><h4>{{ item['filename'] }}</h4></td>
                 
                 <td>
-                    <h5> {{ item['name'] }}<h5>
+                    {% if item['content_type'] != 'text/plain': %}
+                        <img src="{{ item['url'] }}" alt="{{ item['filename'] }}" width="400" height="200">
+                    {% else: %}
+                        <p>{{item['content']}}</p>
+                    {% endif %}
                 </td>
                 <td>
-                        <h5> {{ item['hub'] }}<h5>
+                        <h5> {{ item['time'] }}<h5>
                 </td>
                 <br>
                  <td>
-                        <h5>{{ item['vacation'] }}<h5>
+                        <h5>{{ item['priority'] }}<h5>
                 </td>
                </tr>
                 
